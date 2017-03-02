@@ -100,4 +100,9 @@ class reducerClass {
 
     return newState;
   }
+
+  static fetchListSuccess(newState, action) {
+    newState.list = action.users;
+    return newState;
+  }
 }

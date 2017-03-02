@@ -49,6 +49,17 @@ class UserEdit extends React.Component {
   }
 
   formSubmit(values) {
+    const upper_form_type = this.form_type.charAt(0).toUpperCase() + this.form_type.slice(1);
+
+    //add/edit user on the api
+    this.props.dispatch({
+      type: 'users' + upper_form_type,
+      id: values.id,
+      username: values.username,
+      job: values.job
+    });
+
+    //add/edit user on the state
     this.props.dispatch({
       type: 'users.' + this.form_type, //add or edit
       id: values.id,

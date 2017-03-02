@@ -3,12 +3,18 @@ import UserListElement from './UserListElement';
 import UserDelete from './UserDelete';
 import {connect} from 'react-redux';
 
-import {Table, Pagination} from 'react-bootstrap';
+import {Table, Pagination, ProgressBar} from 'react-bootstrap';
 import {push} from 'react-router-redux';
 
 class UserList extends React.Component {
   constructor(props) {
     super(props);
+
+    if (this.props.users.length === 0) {
+      this.props.dispatch({
+        type: 'usersFetchList'
+      });
+    }
 
     this.changePage = this.changePage.bind(this);
   }
@@ -23,6 +29,12 @@ class UserList extends React.Component {
     const current_page = this.props.page;
     const start_offset = (current_page - 1) * per_page;
     let start_count = 0;
+
+    if (!this.props.users.length) {
+      return (
+        <ProgressBar active now={100}/>
+      );
+    }
 
     return (
       <div>
@@ -64,7 +76,7 @@ class UserList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    users: state.users.list,
+    users: state.users.list || [],
     page: Number(state.routing.locationBeforeTransitions.query.page) || 1
   };
 }

@@ -14,38 +14,21 @@ import Home from './pages/Home';
 import UserEdit from './pages/UserEdit';
 import NotFound from './pages/NotFound';
 
+import createSagaMiddleware from 'redux-saga';
+import {sagas} from './sagas/index';
+
 import './stylesheets/main.scss';
 // import { store } from "./store.js";
 // import { router } from "./router.js";
-//
-// // render the main component
-// ReactDOM.render(
-//   <Provider store={store}>
-//     {router}
-//   </Provider>,
-//   document.getElementById('app')
-// );
 
-let users = [];
-for (let i=1; i<10; i++) {
-  users.push({
-    id: i,
-    username: 'Lucas ' + i,
-    job: 'Employee ' + i
-  });
-}
-const initial_state = {
-  users: {
-    list: users
-  }
-};
-
-let middleware = applyMiddleware(routerMiddleware(browserHistory));
+const sagaMiddleware = createSagaMiddleware();
+let middleware = applyMiddleware(routerMiddleware(browserHistory), sagaMiddleware);
 if (process.env.NODE_ENV !== 'production') {
   middleware = compose(middleware, window.devToolsExtension && window.devToolsExtension());
 }
-const store = createStore(reducers, initial_state, middleware);
+const store = createStore(reducers, middleware);
 const history = syncHistoryWithStore(browserHistory, store);
+sagaMiddleware.run(sagas);
 
 ReactDOM.render(
   <Provider store={store}>
