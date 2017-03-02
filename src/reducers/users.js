@@ -76,7 +76,8 @@ class reducerClass {
 
   static add(newState, action)
   {
-    const id = Number((Math.random() * 1000000).toPrecision(6));
+    // const id = Number((Math.random() * 1000000).toPrecision(6));
+    const id = action.id ? action.id : Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
     newState.list.push({
       id: id,
       username: action.username,
