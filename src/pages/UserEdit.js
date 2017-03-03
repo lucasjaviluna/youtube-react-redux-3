@@ -6,6 +6,9 @@ import {Field, reduxForm} from 'redux-form';
 import {connect} from 'react-redux';
 import {goBack} from 'react-router-redux';
 
+import UserEditUsername from './UserEditUsername';
+import UserEditJob from './UserEditJob';
+
 class UserEdit extends React.Component {
   form_type;
 
@@ -17,36 +20,36 @@ class UserEdit extends React.Component {
     this.formSubmit = this.formSubmit.bind(this);
   }
 
-  static renderUsername(props) {
-      return (
-        <FormGroup validationState={!props.meta.touched ? null :
-          (props.meta.error ? 'error' : 'success')}>
-          <Col sm={2}>Username</Col>
-          <Col sm={8}>
-            <FormControl {...props.input} id="username" type="text" placeholder="Username" />
-            <FormControl.Feedback/>
-            <HelpBlock>{props.meta.touched && props.meta.error ?
-              props.meta.error : null}</HelpBlock>
-          </Col>
-        </FormGroup>
-      );
-  }
-
-  static renderJob(props) {
-      return (
-        <FormGroup>
-          <Col sm={2}>Job</Col>
-          <Col sm={8}>
-            <InputGroup>
-              <FormControl {...props.input} id="job" type="text" placeholder="Job" />
-              <InputGroup.Addon>
-                <Glyphicon glyph="briefcase"/>
-              </InputGroup.Addon>
-            </InputGroup>
-          </Col>
-        </FormGroup>
-      );
-  }
+  // static renderUsername(props) {
+  //     return (
+  //       <FormGroup validationState={!props.meta.touched ? null :
+  //         (props.meta.error ? 'error' : 'success')}>
+  //         <Col sm={2}>Username</Col>
+  //         <Col sm={8}>
+  //           <FormControl {...props.input} id="username" type="text" placeholder="Username" />
+  //           <FormControl.Feedback/>
+  //           <HelpBlock>{props.meta.touched && props.meta.error ?
+  //             props.meta.error : null}</HelpBlock>
+  //         </Col>
+  //       </FormGroup>
+  //     );
+  // }
+  //
+  // static renderJob(props) {
+  //     return (
+  //       <FormGroup>
+  //         <Col sm={2}>Job</Col>
+  //         <Col sm={8}>
+  //           <InputGroup>
+  //             <FormControl {...props.input} id="job" type="text" placeholder="Job" />
+  //             <InputGroup.Addon>
+  //               <Glyphicon glyph="briefcase"/>
+  //             </InputGroup.Addon>
+  //           </InputGroup>
+  //         </Col>
+  //       </FormGroup>
+  //     );
+  // }
 
   formSubmit(values) {
     const upper_form_type = this.form_type.charAt(0).toUpperCase() + this.form_type.slice(1);
@@ -76,8 +79,10 @@ class UserEdit extends React.Component {
       <div>
         <PageHeader>{ 'edit' === this.form_type ? 'User Edit' : 'Add user'}</PageHeader>
         <Form horizontal onSubmit={this.props.handleSubmit(this.formSubmit)}>
-          <Field name="username" component={UserEdit.renderUsername} />
-          <Field name="job" component={UserEdit.renderJob} />
+          {/* <Field name="username" component={UserEdit.renderUsername} />
+          <Field name="job" component={UserEdit.renderJob} /> */}
+          <Field name="username" component={UserEditUsername} />
+          <Field name="job" component={UserEditJob} />
           <FormGroup>
             <Col smOffset={2} sm={8}>
               <Button type="submit" disabled={this.props.invalid || this.props.submitting}>Save User</Button>
