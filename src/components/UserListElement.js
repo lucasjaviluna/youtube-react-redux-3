@@ -3,11 +3,18 @@ import {Button, Glyphicon} from 'react-bootstrap';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 
-class UserListElement extends React.Component {
+export class UserListElement extends React.Component {
   constructor(props) {
     super(props);
 
     this.modalDeleteShow = this.modalDeleteShow.bind(this);
+  }
+
+  static get propTypes()
+  {
+    return {
+      user: React.PropTypes.object.isRequired
+    };
   }
 
   modalDeleteShow(event) {
@@ -45,8 +52,8 @@ class UserListElement extends React.Component {
   }
 }
 
-UserListElement.propTypes = {
-  user: React.PropTypes.object.isRequired
-}
+// UserListElement.propTypes = {
+//   user: React.PropTypes.object.isRequired
+// }
 
 export default connect()(UserListElement);

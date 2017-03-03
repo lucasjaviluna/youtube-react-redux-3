@@ -2,7 +2,7 @@ import React from "react";
 import {Modal, Button} from 'react-bootstrap';
 import {connect} from 'react-redux';
 
-class UserDelete extends React.Component {
+export class UserDelete extends React.Component {
   constructor(props){
     super(props);
 

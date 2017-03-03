@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {Table, Pagination, ProgressBar} from 'react-bootstrap';
 import {push} from 'react-router-redux';
 
-class UserList extends React.Component {
+export class UserList extends React.Component {
   constructor(props) {
     super(props);
 
